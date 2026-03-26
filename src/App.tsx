@@ -191,16 +191,14 @@ const MenuHighlights = () => {
   return (
     <section id="menu" className="py-24 bg-[#111]">
       <div className="container mx-auto px-6">
-        <div className="flex flex-col md:flex-row justify-between items-end mb-12 gap-6">
-          <SectionHeading title="What We're Serving" subtitle="Mouth-watering options for every craving." />
-          <div className="hidden md:flex gap-4 mb-6">
-            <button onClick={() => scroll('left')} className="p-3 rounded-full bg-[#1a1a1a] border border-white/10 hover:bg-orange-500 hover:text-white transition-colors">
-              <ChevronLeft className="w-6 h-6" />
-            </button>
-            <button onClick={() => scroll('right')} className="p-3 rounded-full bg-[#1a1a1a] border border-white/10 hover:bg-orange-500 hover:text-white transition-colors">
-              <ChevronRight className="w-6 h-6" />
-            </button>
-          </div>
+        <SectionHeading title="What We're Serving" subtitle="Mouth-watering options for every craving." />
+        <div className="hidden md:flex justify-end gap-4 mb-6 -mt-8">
+          <button onClick={() => scroll('left')} className="p-3 rounded-full bg-[#1a1a1a] border border-white/10 hover:bg-orange-500 hover:text-white transition-colors">
+            <ChevronLeft className="w-6 h-6" />
+          </button>
+          <button onClick={() => scroll('right')} className="p-3 rounded-full bg-[#1a1a1a] border border-white/10 hover:bg-orange-500 hover:text-white transition-colors">
+            <ChevronRight className="w-6 h-6" />
+          </button>
         </div>
         
         <div 
