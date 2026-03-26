@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { motion } from 'motion/react';
 import { Star, MapPin, Clock, Phone, MessageCircle, ChevronDown, ChevronUp, Utensils, CheckCircle2, ArrowRight } from 'lucide-react';
 
-const WHATSAPP_NUMBER = "1234567890"; // Replace with actual number
+const WHATSAPP_NUMBER = "+8801963301885"; // Replace with actual number
 const WHATSAPP_LINK = `https://wa.me/${WHATSAPP_NUMBER}?text=Hi,%20I'd%20like%20to%20order%20from%20Roadside%20Kitchen!`;
 
 // --- Components ---
