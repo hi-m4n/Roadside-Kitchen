@@ -1,8 +1,8 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { motion } from 'motion/react';
-import { Star, MapPin, Clock, Phone, MessageCircle, ChevronDown, ChevronUp, Utensils, CheckCircle2, ArrowRight } from 'lucide-react';
+import { Star, MapPin, Clock, Phone, MessageCircle, ChevronDown, ChevronUp, Utensils, CheckCircle2, ArrowRight, ChevronLeft, ChevronRight } from 'lucide-react';
 
-const WHATSAPP_NUMBER = "+8801963301885"; // Replace with actual number
+const WHATSAPP_NUMBER = "1234567890"; // Replace with actual number
 const WHATSAPP_LINK = `https://wa.me/${WHATSAPP_NUMBER}?text=Hi,%20I'd%20like%20to%20order%20from%20Roadside%20Kitchen!`;
 
 // --- Components ---
@@ -161,19 +161,53 @@ const SocialProof = () => {
 };
 
 const MenuHighlights = () => {
+  const scrollRef = useRef<HTMLDivElement>(null);
+
+  const scroll = (direction: 'left' | 'right') => {
+    if (scrollRef.current) {
+      const { current } = scrollRef;
+      const scrollAmount = direction === 'left' ? -current.offsetWidth : current.offsetWidth;
+      current.scrollBy({ left: scrollAmount, behavior: 'smooth' });
+    }
+  };
+
   const menu = [
     { title: "🍗 Grilled & Fried Items", desc: "Crispy on the outside, juicy inside. Perfectly seasoned.", img: "https://images.unsplash.com/photo-1562967914-608f82629710?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" },
     { title: "🍔 Burgers & Fast Food", desc: "Smash burgers, loaded fries, and quick bites to satisfy cravings.", img: "https://images.unsplash.com/photo-1568901346375-23c9450c58cd?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" },
     { title: "🍜 Street-Style Meals", desc: "Authentic, bold flavors cooked fresh right in front of you.", img: "https://images.unsplash.com/photo-1555126634-323283e090fa?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" },
-    { title: "🥤 Drinks & Refreshments", desc: "Ice-cold beverages, shakes, and sodas to cool you down.", img: "https://images.unsplash.com/photo-1513558161293-cdaf765ed2fd?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" }
+    { title: "🥤 Drinks & Refreshments", desc: "Ice-cold beverages, shakes, and sodas to cool you down.", img: "https://images.unsplash.com/photo-1513558161293-cdaf765ed2fd?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" },
+    { title: "🌮 Tacos & Wraps", desc: "Stuffed with fresh ingredients and zesty sauces.", img: "https://images.unsplash.com/photo-1551504734-5ee1c4a1479b?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" },
+    { title: "🥗 Fresh Salads", desc: "Crisp greens, grilled proteins, and house-made dressings.", img: "https://images.unsplash.com/photo-1512621776951-a57141f2eefd?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" },
+    { title: "🍰 Sweet Desserts", desc: "Decadent treats to perfectly end your meal.", img: "https://images.unsplash.com/photo-1551024506-0bccd828d307?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" },
+    { title: "🍕 Wood-Fired Pizza", desc: "Thin crust, rich tomato sauce, and gooey melted cheese.", img: "https://images.unsplash.com/photo-1513104890138-7c749659a591?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" },
+    { title: "🥪 Gourmet Sandwiches", desc: "Toasted to perfection with premium meats and fresh veggies.", img: "https://images.unsplash.com/photo-1528735602780-2552fd46c7af?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" },
+    { title: "🔥 Spicy Wings", desc: "Tossed in our signature hot sauce and served with cooling dip.", img: "https://images.unsplash.com/photo-1569691899455-88464f6d3ab1?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" },
+    { title: "🥘 Hearty Bowls", desc: "Warm grains, roasted veggies, and savory proteins.", img: "https://images.unsplash.com/photo-1546069901-ba9599a7e63c?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" },
+    { title: "🍟 Loaded Fries", desc: "Smothered in melted cheese, crispy bacon, and jalapeños.", img: "https://images.unsplash.com/photo-1576107232684-1279f390859f?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" },
+    { title: "🍦 Milkshakes & Floats", desc: "Thick, creamy, and topped with whipped cream and cherry.", img: "https://images.unsplash.com/photo-1572490122747-3968b75cc699?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" },
+    { title: "🍳 All-Day Breakfast", desc: "Eggs, bacon, and fluffy pancakes available anytime.", img: "https://images.unsplash.com/photo-1533089860892-a7c6f0a88666?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" }
   ];
 
   return (
     <section id="menu" className="py-24 bg-[#111]">
       <div className="container mx-auto px-6">
-        <SectionHeading title="What We're Serving" subtitle="Mouth-watering options for every craving." />
+        <div className="flex flex-col md:flex-row justify-between items-end mb-12 gap-6">
+          <SectionHeading title="What We're Serving" subtitle="Mouth-watering options for every craving." />
+          <div className="hidden md:flex gap-4 mb-6">
+            <button onClick={() => scroll('left')} className="p-3 rounded-full bg-[#1a1a1a] border border-white/10 hover:bg-orange-500 hover:text-white transition-colors">
+              <ChevronLeft className="w-6 h-6" />
+            </button>
+            <button onClick={() => scroll('right')} className="p-3 rounded-full bg-[#1a1a1a] border border-white/10 hover:bg-orange-500 hover:text-white transition-colors">
+              <ChevronRight className="w-6 h-6" />
+            </button>
+          </div>
+        </div>
         
-        <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6 mb-16">
+        <div 
+          ref={scrollRef}
+          className="flex overflow-x-auto gap-6 pb-8 snap-x snap-mandatory hide-scrollbar"
+          style={{ scrollbarWidth: 'none', msOverflowStyle: 'none' }}
+        >
           {menu.map((item, i) => (
             <motion.div 
               key={i}
@@ -181,7 +215,7 @@ const MenuHighlights = () => {
               whileInView={{ opacity: 1, scale: 1 }}
               viewport={{ once: true }}
               transition={{ delay: i * 0.1 }}
-              className="group rounded-2xl overflow-hidden bg-[#1a1a1a] border border-white/5 hover:border-orange-500/30 transition-colors"
+              className="snap-start shrink-0 w-[85vw] md:w-[40vw] lg:w-[25vw] group rounded-2xl overflow-hidden bg-[#1a1a1a] border border-white/5 hover:border-orange-500/30 transition-colors"
             >
               <div className="h-48 overflow-hidden">
                 <img src={item.img} alt={item.title} className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500" />
@@ -194,7 +228,7 @@ const MenuHighlights = () => {
           ))}
         </div>
 
-        <div className="text-center">
+        <div className="text-center mt-8">
           <Button href="#contact">👉 Order Now</Button>
         </div>
       </div>
