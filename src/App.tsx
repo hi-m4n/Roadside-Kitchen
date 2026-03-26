@@ -320,12 +320,17 @@ const Location = () => (
               Get Directions
             </Button>
           </div>
-          <div className="h-64 md:h-auto bg-gray-800 relative">
-            {/* Placeholder for Map - In a real app, embed Google Maps iframe here */}
-            <div className="absolute inset-0 flex items-center justify-center bg-[#222]">
-               <MapPin className="w-16 h-16 text-gray-600" />
-               <span className="absolute bottom-4 text-gray-500 font-medium">Interactive Map Area</span>
-            </div>
+          <div className="h-64 md:h-auto bg-gray-800 relative min-h-[300px]">
+            <iframe 
+              src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3650.4516031799426!2d90.35070387402115!3d23.802535078634822!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3755c13941db9ab1%3A0xbd332a9eff4a2fb!2z4Kaw4KeL4Kah4Ka44Ka-4KaH4KahIOCmleCmv-CmmuCnh-CmqA!5e0!3m2!1sbn!2sbd!4v1774546363087!5m2!1sbn!2sbd" 
+              width="100%" 
+              height="100%" 
+              style={{ border: 0, position: 'absolute', top: 0, left: 0 }} 
+              allowFullScreen={true} 
+              loading="lazy" 
+              referrerPolicy="no-referrer-when-downgrade"
+              title="Google Map Location"
+            ></iframe>
           </div>
         </div>
       </div>
